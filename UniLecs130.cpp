@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const size_t DIM = 4;
+const size_t DIM = 3;
 
 size_t sum(size_t** m, size_t d) //Сумма элементов подмассива
 {
@@ -53,17 +53,17 @@ for(size_t i = 0; i < DIM; i++)
 {
     for(size_t j = 0;  j<DIM; j++)
     {
-    size_t d = DIM-j-1; //Задаем длину для подмассива
-        while(d!=0)
+    //Задаем длину для подмассива
+        for(size_t d = 1; d<DIM; d++)
         {
-        parr = getPArr(Arr,d,i,j);
-        if(sum(parr, d)==X) //Если сумма в подмассиве равна данной прибавляем счетчик
-            {
+            if(i-d<0||j-d<0)
+            continue;
+            parr = getPArr(Arr, d, i, j);
+            if(sum(parr, d)==X)
             cnt++;
-            }
-        d--;
+            deletePArr(parr, d);
         }
-        deletePArr(parr, d);
+
     }
 }
 cout<<"Подходит "<<cnt;
